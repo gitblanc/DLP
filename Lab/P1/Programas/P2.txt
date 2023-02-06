@@ -1,0 +1,14 @@
+PUSHA 0
+IN 'a = in
+STORE 	
+PUSHA 0
+LOAD
+PUSH 10
+LT
+JZ fueraIf 'salta si es cero
+PUSH 0
+OUT
+fueraIf:
+PUSHA 0
+LOAD
+OUT	

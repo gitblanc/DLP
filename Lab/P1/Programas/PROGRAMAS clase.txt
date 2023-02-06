@@ -1,0 +1,29 @@
+Ejercicios DLP clase
+--------------------
+PROGRAMA  PROGRAMA
+NORMAL	  MAPL
+
+int a; -> no genera código
+a = 8; -> PUSHA0
+	  PUSH 8
+	  STORE
+print a; ->	PUSHA0	//mete un 00 en la cima de la pila
+		LOAD
+		OUT
+--------------------
+int a; ->	
+read a; ->	PUSHA0
+		IN //a = in
+		STORE 	
+if(a < 10){	PUSHA0
+		LOAD
+		PUSH 10
+		LT
+		JZ fueraIf://salta si es cero
+	print 0;	PUSH 0
+			OUT
+}		fueraIf:
+print a;	PUSHA0
+		LOAD
+		OUT	
+----

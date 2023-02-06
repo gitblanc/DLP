@@ -1,0 +1,16 @@
+PUSHA 0
+IN 'ladoA = IN
+STORE
+
+PUSHA 2
+IN 'ladoB = IN
+STORE
+
+PUSHA 0
+LOAD 'ladoA
+PUSHA 2
+LOAD 'ladoB
+ADD
+PUSH 2
+MUL
+OUT

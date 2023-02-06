@@ -1,0 +1,63 @@
+Ejercicios DLP clase
+--------------------
+PROGRAMA  PROGRAMA
+NORMAL	  MAPL
+
+int a; -> no genera código
+a = 8; -> PUSHA0
+	  PUSH 8
+	  STORE
+print a; ->	PUSHA0	//mete un 00 en la cima de la pila
+		LOAD
+		OUT
+--------------------
+int a; ->	
+read a; ->	PUSHA0
+		IN //a = in
+		STORE 	
+if(a < 10){	PUSHA0
+		LOAD
+		PUSH 10
+		LT
+		JZ fueraIf://salta si es cero
+	print 0;	PUSH 0
+			OUT
+}		fueraIf:
+print a;	PUSHA0
+		LOAD
+		OUT	
+----
+//un print es PUSHB 98
+//un \n se representa con un PUSHB 10
+---
+P4 enunciado
+
+int ladoA,ladoB;
+
+read ladoA;
+read ladoB;
+
+print(ladoA+ladoB)*2;
+---
+P5 enunciado
+
+float f;
+read f;
+print 1+f*2;
+---
+P6 Enunciado
+
+int i;
+i = 0;
+while (i < 10){
+	printLn i;
+	i = i+1;
+}
+
+---
+P7 Enunciado
+
+Pedir 3 números reales e imprimir el menor
+
+
+---

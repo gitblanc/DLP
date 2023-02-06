@@ -1,0 +1,31 @@
+PUSHA 0
+PUSH 0
+STORE 'i = 0
+
+bucleWhile:
+ PUSHA 0
+ LOAD
+ PUSH 10
+ LE 'i<=10
+ JZ fueraWhile
+ 
+ PUSHA 0
+ LOAD
+ OUT
+ PUSHB 10 'printLn
+ OUTB
+
+ PUSHA 0 'i=i+1
+ PUSHA 0
+ LOAD
+ PUSH 1
+ ADD
+ STORE
+
+ JMP bucleWhile
+
+fueraWhile:
+ HALT
+
+
+
