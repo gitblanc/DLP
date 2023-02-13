@@ -1,0 +1,200 @@
+/*
+Añadir EN ESTE ORDEN:
+- Literales reales: 3.15, 78.23, ... (parte entera obligatoria/parte decimal OPCIONAL)
+- Operadores aritméticos y otros simbolos:  + - * / . : = ; [ ] ( ) { } < >
+- Palabras reservadas: if, while, read, print, int y float
+*/
+
+package lexer;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Lexico {
+	public static final int END = 0;
+
+	public static final int LITENT = 256;
+	public static final int LITREAL = 258;
+	public static final int IDENT = 257;
+	public static final int DELIMITADOR = 259; // Lexemas: '(' ')' '{' '}'
+	public static final int COND = 260; // if
+	public static final int WHILE = 261; // while
+	public static final int READ = 262; // read
+	public static final int PRINT = 263; // if
+	public static final int INT = 264; // int
+	public static final int FLOAT = 265; // float
+
+	private Reader input;
+	private int currentChar;
+	private Map<Integer, String> lexico = new HashMap<>();
+
+	public Lexico(Reader reader) throws IOException {
+		input = reader;
+		initializeMap();
+		readNext();
+	}
+
+	// Funciones auxiliares -------------------------------
+	private int readNext() throws IOException {
+		currentChar = input.read();
+		return currentChar;
+	}
+
+	private int getChar() throws IOException {
+		return currentChar;
+	}
+	
+	private void initializeMap() {
+		lexico.put(COND, "if");
+		lexico.put(WHILE, "while");
+		lexico.put(READ, "read");
+		lexico.put(PRINT, "print");
+		lexico.put(INT, "int");
+		lexico.put(FLOAT, "float");
+	}
+	
+	private int obtainKeyValue(String value) {
+		for(int key : lexico.keySet()) {
+			if(lexico.get(key).equals(value))
+				return key;
+		}
+		return -1;
+	}
+
+	// Aquí empieza el Analizador Léxico ------------------
+	public Token nextToken() throws IOException {
+
+		while (true) {
+			while (Character.isWhitespace(getChar()))
+				readNext();
+
+			if (getChar() == -1)
+				return new Token(END, null);
+
+			// Aritmetic operators and other symbols
+			if (getChar() == '*') {
+				readNext();
+				return new Token('*', "*");
+			}
+
+			if (getChar() == '+') {
+				readNext();
+				return new Token('+', "+");
+			}
+
+			if (getChar() == '-') {
+				readNext();
+				return new Token('-', "-");
+			}
+
+			if (getChar() == '.') {
+				readNext();
+				return new Token('.', ".");
+			}
+
+			if (getChar() == '/') {
+				readNext();
+				return new Token('/', "/");
+			}
+
+			if (getChar() == ':') {
+				readNext();
+				return new Token(':', ":");
+			}
+
+			if (getChar() == '=') {
+				readNext();
+				return new Token('=', "=");
+			}
+
+			if (getChar() == ';') {
+				readNext();
+				return new Token(';', ";");
+			}
+
+			if (getChar() == '[') {
+				readNext();
+				return new Token('[', "[");
+			}
+
+			if (getChar() == ']') {
+				readNext();
+				return new Token(']', "]");
+			}
+
+			if (getChar() == '(') {
+				readNext();
+				return new Token(DELIMITADOR, "(");
+			}
+
+			if (getChar() == ')') {
+				readNext();
+				return new Token(DELIMITADOR, ")");
+			}
+
+			if (getChar() == '{') {
+				readNext();
+				return new Token(DELIMITADOR, "{");
+			}
+
+			if (getChar() == '}') {
+				readNext();
+				return new Token(DELIMITADOR, "{");
+			}
+
+			if (getChar() == '<') {
+				readNext();
+				return new Token('<', "<");
+			}
+
+			if (getChar() == '>') {
+				readNext();
+				return new Token('>', ">");
+			}
+			// -----------------------------------
+			if (Character.isDigit(getChar())) {
+				StringBuffer buffer = new StringBuffer();
+				buffer.append((char) getChar());
+				while (Character.isDigit(readNext()))
+					buffer.append((char) getChar());
+				if (getChar() == '.') {// added LITREAL
+					buffer.append((char) getChar());
+					while (Character.isDigit(readNext()))
+						buffer.append((char) getChar());
+					return new Token(LITREAL, buffer.toString());
+				}
+				return new Token(LITENT, buffer.toString());
+			}
+
+			if (Character.isLetter(getChar())) {
+				StringBuffer buffer = new StringBuffer();
+				buffer.append((char) getChar());
+				while (Character.isLetterOrDigit(readNext())) {
+					//Reserved words
+					if(lexico.containsValue(buffer.toString()))
+						return new Token(obtainKeyValue(buffer.toString()), buffer.toString());
+//					if (buffer.toString().toLowerCase().equals("if"))
+//						return new Token(COND, buffer.toString());
+//					if (buffer.toString().toLowerCase().equals("while"))
+//						return new Token(WHILE, buffer.toString());
+//					if (buffer.toString().toLowerCase().equals("read"))
+//						return new Token(READ, buffer.toString());
+//					if (buffer.toString().toLowerCase().equals("print"))
+//						return new Token(PRINT, buffer.toString());
+//					if (buffer.toString().toLowerCase().equals("int"))
+//						return new Token(INT, buffer.toString());
+//					if (buffer.toString().toLowerCase().equals("float"))
+//						return new Token(FLOAT, buffer.toString());
+
+					buffer.append((char) getChar());
+				}
+				return new Token(IDENT, buffer.toString());
+			}
+
+			System.out.println("Error léxico: " + (char) getChar());
+			readNext();
+		}
+	}
+}

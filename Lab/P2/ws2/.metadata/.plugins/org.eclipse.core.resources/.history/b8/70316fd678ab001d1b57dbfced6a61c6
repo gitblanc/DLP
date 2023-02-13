@@ -1,0 +1,156 @@
+/*
+Añadir EN ESTE ORDEN:
+- Literales reales: 3.15, 78.23, ... (parte entera obligatoria/parte decimal OPCIONAL)
+- Operadores aritméticos y otros simbolos:  + - * / . : = ; [ ] ( ) { } < >
+- Palabras reservadas: if, while, read, print, int y float
+*/
+
+package lexer;
+
+import java.io.*;
+
+public class Lexico {
+    public static final int END = 0;
+
+    public static final int LITENT = 256;
+    public static final int LITREAL = 258;
+    public static final int IDENT = 257;
+    public static final int DELIMITADOR = 259;
+    
+    private Reader input;
+    private int currentChar;
+
+    public Lexico(Reader reader) throws IOException {
+        input = reader;
+        readNext();
+    }
+
+    // Funciones auxiliares -------------------------------
+    private int readNext() throws IOException {
+        currentChar = input.read();
+        return currentChar;
+    }
+
+    private int getChar() throws IOException {
+        return currentChar;
+    }
+
+    // Aquí empieza el Analizador Léxico ------------------
+    public Token nextToken() throws IOException {
+
+        while (true) {
+            while (Character.isWhitespace(getChar()))
+                readNext();
+
+            if (getChar() == -1)
+                return new Token(END, null);
+            
+            // Aritmetic operators
+            if (getChar() == '*') {
+                readNext();
+                return new Token('*', "*");
+            }
+            
+            if (getChar() == '+') {
+                readNext();
+                return new Token('+', "+");
+            }
+            
+            if (getChar() == '-') {
+                readNext();
+                return new Token('-', "-");
+            }
+            
+            if (getChar() == '.') {
+                readNext();
+                return new Token('.', ".");
+            }
+            
+            if (getChar() == '/') {
+                readNext();
+                return new Token('/', "/");
+            }
+            
+            if (getChar() == ':') {
+                readNext();
+                return new Token(':', ":");
+            }
+            
+            if (getChar() == '=') {
+                readNext();
+                return new Token('=', "=");
+            }
+            
+            if (getChar() == ';') {
+                readNext();
+                return new Token(';', ";");
+            }
+            
+            
+            if (getChar() == '[') {
+                readNext();
+                return new Token('[', "[");
+            }
+            
+            if (getChar() == ']') {
+                readNext();
+                return new Token(']', "]");
+            }
+            
+            if (getChar() == '(') {
+                readNext();
+                return new Token('(', "(");
+            }
+            
+            if (getChar() == ')') {
+                readNext();
+                return new Token(')', ")");
+            }
+            
+            if (getChar() == '{') {
+                readNext();
+                return new Token('{', "{");
+            }
+            
+            if (getChar() == '}') {
+                readNext();
+                return new Token('{', "{");
+            }
+            
+            if (getChar() == '<') {
+                readNext();
+                return new Token('<', "<");
+            }
+            
+            if (getChar() == '>') {
+                readNext();
+                return new Token('>', ">");
+            }
+            //-----------------------------------
+            if (Character.isDigit(getChar())) {
+                StringBuffer buffer = new StringBuffer();
+                buffer.append((char) getChar());
+                while (Character.isDigit(readNext()))
+                    buffer.append((char) getChar());
+                if(getChar() == '.') {//added LITREAL
+                	buffer.append((char)getChar());
+                	while (Character.isDigit(readNext()))
+                        buffer.append((char) getChar());
+                	return new Token(LITREAL, buffer.toString());
+                }
+                return new Token(LITENT, buffer.toString());
+            }
+
+            if (Character.isLetter(getChar())) {
+                StringBuffer buffer = new StringBuffer();
+                buffer.append((char) getChar());
+                while (Character.isLetterOrDigit(readNext()))
+                    buffer.append((char) getChar());
+                return new Token(IDENT, buffer.toString());
+            }
+
+            System.out.println("Error léxico: " + (char) getChar());
+            readNext();
+        }
+    }
+}

@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+/run/media/gitblanc/01/3 CURSO CLASE/DLP/P2/ws2/.metadata/.plugins/org.eclipse.jdt.core
+899957025.index
+3176863384.index
+1865797976.index
+1616249997.index
+1366270901.index
