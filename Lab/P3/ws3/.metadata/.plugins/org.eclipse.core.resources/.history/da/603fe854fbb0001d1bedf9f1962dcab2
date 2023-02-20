@@ -1,0 +1,25 @@
+grammar Grammar;
+
+import Lexicon;
+
+start : DATA variables CODE sentencias EOF;
+
+variables:
+ | variables variable
+ 
+ variable: tipo IDENT ';'
+ 
+ tipo: INT
+  | REAL
+  
+ sentencias:
+  | sentencias sentencia
+ 
+ sentencia: PRINT expr';'
+ 	 | expr '=' expr ';'
+ 
+ expr: IDENT
+ 	| LITENT
+ 	| LITREAL
+ 	| expr '+'expr
+ 	;

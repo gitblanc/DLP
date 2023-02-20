@@ -1,0 +1,28 @@
+grammar Grammar;
+
+import Lexicon;
+
+start : DATA variables CODE sentencias EOF;
+
+variables:
+ | variables variable
+ 
+ variable: tipo IDENT ';'
+ 
+ tipo: INT
+  | REAL
+  
+ sentencias:
+  | sentencias sentencia
+ 
+ sentencia: PRINT expr';'
+ 	 | expr IGUAL expr ';'
+ 	 | IF PARIZQ sentencia PARDER CORCHETEIZQ sentencia CORCHETEDER ELSE CORCHETEIZQ sentencia CORCHETEDER
+ 	 | WHILE sentencia
+ 
+ expr: IDENT
+ 	| LITENT
+ 	| LITREAL
+ 	| expr '+' expr
+ 	| CASTINT expr
+ 	;

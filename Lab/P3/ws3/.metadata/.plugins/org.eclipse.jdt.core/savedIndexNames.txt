@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+D:\3 CURSO CLASE\DLP\P3\ws3\.metadata\.plugins\org.eclipse.jdt.core
+2367783050.index
+3382239789.index
+556469853.index
+1865797976.index

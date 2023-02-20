@@ -1,0 +1,35 @@
+grammar Grammar;
+
+import Lexicon;
+
+start : DATA variables CODE sentencias EOF;
+
+variables:
+ | variables variable;
+ 
+ variable: tipo IDENT PCOMA;
+ 
+ tipo: INT
+  | REAL;
+  
+ sentencias:
+  | sentencias sentencia;
+ 
+ sentencia: READ IDENT PCOMA
+ 	 | PRINT expr PCOMA
+ 	 | expr IGUAL expr PCOMA
+ 	 | IF PARIZQ expr PARDER CORCHETEIZQ sentencias CORCHETEDER ELSE CORCHETEIZQ sentencia CORCHETEDER
+ 	 | WHILE PARIZQ expr PARDER CORCHETEIZQ sentencias CORCHETEDER
+ 	 | IDENT PARIZQ expr PARDER PCOMA
+ 	;
+ 	
+ expr: IDENT
+ 	| LITENT
+ 	| LITREAL
+ 	| expr MAS expr
+ 	| expr DISTINTO expr
+ 	| CASTINT expr
+ 	| PARIZQ expr PARDER expr
+ 	| PARIZQ expr PARDER
+ 	| expr COMA expr
+ 	;
