@@ -46,22 +46,44 @@
             <td><strong>&nbsp;Predicados&nbsp;</strong></td>
             <td><strong>&nbsp;Reglas&nbsp;Semánticas&nbsp;</strong></td>
         </tr>
-<tr><td><span class="nodo">program</span>&nbsp;&rarr;  <span class="nombreAtt">definitions</span><span class="tipoAtt">:varDefinition*</span> <span class="nombreAtt">sentences</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
-<tr><td><span class="nodo">varDefinition</span>&nbsp;&rarr;  <span class="nombreAtt">type</span><span class="tipoAtt">:type</span> <span class="nombreAtt">name</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">program</span>&nbsp;&rarr;  <span class="nombreAtt">definicion</span><span class="tipoAtt">:definicion*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">parametros</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span> <span class="nombreAtt">tipo</span><span class="tipoAtt">:tipo</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">variableStruct</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span> <span class="nombreAtt">tipo</span><span class="tipoAtt">:tipo</span></td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
-<tr><td><span class="nodo">intType</span>:<span class="categoria">type</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
-<tr><td><span class="nodo">realType</span>:<span class="categoria">type</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
+<tr><td><span class="nodo">defVariable</span>:<span class="categoria">definicion</span>&nbsp;&rarr;  <span class="nombreAtt">tipo</span><span class="tipoAtt">:tipo</span> <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">defStruct</span>:<span class="categoria">definicion</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span> <span class="nombreAtt">definicion</span><span class="tipoAtt">:definicion*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">defFuncion</span>:<span class="categoria">definicion</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span> <span class="nombreAtt">parametros</span><span class="tipoAtt">:parametros*</span> <span class="nombreAtt">tipo</span><span class="tipoAtt">:tipo</span> <span class="nombreAtt">defvariable</span><span class="tipoAtt">:defVariable*</span> <span class="nombreAtt">sentencia</span><span class="tipoAtt">:sentencia*</span></td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
-<tr><td><span class="nodo">print</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">expression</span><span class="tipoAtt">:expression</span></td><td></td><td></td></tr>
-<tr><td><span class="nodo">assignment</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">left</span><span class="tipoAtt">:expression</span> <span class="nombreAtt">right</span><span class="tipoAtt">:expression</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">intTipo</span>:<span class="categoria">tipo</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
+<tr><td><span class="nodo">realTipo</span>:<span class="categoria">tipo</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
+<tr><td><span class="nodo">charTipo</span>:<span class="categoria">tipo</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
+<tr><td><span class="nodo">arrayTipo</span>:<span class="categoria">tipo</span>&nbsp;&rarr;  <span class="nombreAtt">posicion</span><span class="tipoAtt">:String</span> <span class="nombreAtt">tipo</span><span class="tipoAtt">:tipo</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">structTipo</span>:<span class="categoria">tipo</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
-<tr><td><span class="nodo">arithmeticExpression</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">left</span><span class="tipoAtt">:expression</span> <span class="nombreAtt">operator</span><span class="tipoAtt">:String</span> <span class="nombreAtt">right</span><span class="tipoAtt">:expression</span></td><td></td><td></td></tr>
-<tr><td><span class="nodo">variable</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
-<tr><td><span class="nodo">intConstant</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">value</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
-<tr><td><span class="nodo">realConstant</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">value</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">asignacion</span>:<span class="categoria">sentencia</span>&nbsp;&rarr;  <span class="nombreAtt">izquierda</span><span class="tipoAtt">:expresion</span> <span class="nombreAtt">derecha</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">print</span>:<span class="categoria">sentencia</span>&nbsp;&rarr;  <span class="nombreAtt">print</span><span class="tipoAtt">:expresion</span> <span class="nombreAtt">printTipo</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">read</span>:<span class="categoria">sentencia</span>&nbsp;&rarr;  <span class="nombreAtt">read</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">funcionLlamada</span>:<span class="categoria">sentencia</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span> <span class="nombreAtt">expresion</span><span class="tipoAtt">:expresion*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">if</span>:<span class="categoria">sentencia</span>&nbsp;&rarr;  <span class="nombreAtt">condicion</span><span class="tipoAtt">:expresion</span> <span class="nombreAtt">if_true</span><span class="tipoAtt">:sentencia*</span> <span class="nombreAtt">if_false</span><span class="tipoAtt">:sentencia*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">while</span>:<span class="categoria">sentencia</span>&nbsp;&rarr;  <span class="nombreAtt">condicion</span><span class="tipoAtt">:expresion</span> <span class="nombreAtt">sentencia</span><span class="tipoAtt">:sentencia*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">return</span>:<span class="categoria">sentencia</span>&nbsp;&rarr;  <span class="nombreAtt">retorno</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td>&nbsp;</td><td></td><td></td></tr>
+
+<tr><td><span class="nodo">expresionAritmetica</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">izquierda</span><span class="tipoAtt">:expresion</span> <span class="nombreAtt">operador</span><span class="tipoAtt">:String</span> <span class="nombreAtt">derecha</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">expresionLogica</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">izquierda</span><span class="tipoAtt">:expresion</span> <span class="nombreAtt">operador</span><span class="tipoAtt">:String</span> <span class="nombreAtt">derecha</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">expresionDistinto</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">not</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">variable</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">ident</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">valor</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">litEnt</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">valor</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">litReal</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">valor</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">litChar</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">valor</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">cast</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">tipo</span><span class="tipoAtt">:tipo</span> <span class="nombreAtt">valor</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">array</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span> <span class="nombreAtt">valor</span><span class="tipoAtt">:expresion</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">struct</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:expresion</span> <span class="nombreAtt">campos</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">expresionLlamada</span>:<span class="categoria">expresion</span>&nbsp;&rarr;  <span class="nombreAtt">nombre</span><span class="tipoAtt">:String</span> <span class="nombreAtt">expresion</span><span class="tipoAtt">:expresion*</span></td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
 

@@ -1,0 +1,105 @@
+grammar Grammar;
+import Lexicon;
+	
+@parser::header {
+	import ast.*;
+}
+
+start returns[Program ast]
+	: definiciones EOF { $ast = new Program($definiciones.lista); };
+	;
+
+definiciones returns[List<Definicion> lista = new ArrayList<Definicion>()]
+	: (definicion { $lista.add($definicion.ast);})*;
+
+definicion returns [Definicion ast]
+	: defVariable { ast = $defVariable.ast; }
+	| 'struct' IDENT '{' campos '}' ';' { $ast = new DefStruct($IDENT, $campos.lista); }
+	| funcion { $ast = $funcion.ast; }
+	;
+
+defVariable returns[DefVariable ast]
+	: 'var' IDENT ':' tipo ';' { $ast = new DefVariable($tipo.ast, $IDENT); }
+	;
+
+campos returns[List<Struct> lista = new ArrayList<Struct>()]
+	: (campo {$lista.add($campo.ast);})*;
+
+campo returns[Struct ast]
+	: IDENT ':' tipo ';' { $ast = new Struct($IDENT, $tipo.ast); };
+	;
+
+funcion returns[DefFuncion ast]
+	: IDENT '(' parametros ')' ':' tipo '{' variables sentencias '}' { $ast = new DefFuncion($IDENT, $parametros.lista, $tipo.ast, $variables.lista, $sentencias.lista); }
+	| IDENT '(' parametros ')' '{' variables sentencias '}' { $ast = new DefFuncion($IDENT, $parametros.lista, null, $variables.lista, $sentencias.lista); }
+	;
+	
+variables returns[List<DefVariable> lista = new ArrayList<DefVariable>()]
+	: (defVariable { $lista.add($defVariable.ast); })*;
+	;
+	
+sentencias returns[List<Sentencia> lista = new ArrayList<Sentencia>()]
+	: (sentencia { $list.add($sentencia.ast); })*
+	;
+
+sentencia returns[Sentencia ast]
+	: expr '=' expr ';' { $ast = new Asignacion($ctx.expresion(0), $ctx.expresion(1)); }
+	| 'printsp' expr ';' { $ast = new Print($expresion.ast, "sp"); }
+	| 'print' expr ';' { $ast = new Print($expresion.ast, ""); }
+	| 'println' expr ';' { $ast = new Print($expresion.ast, "ln"); }
+	| 'read' expr ';' { $ast = new Read($expresion.ast); }
+    | funcionLlamada ';'
+	| 'if' '(' expr ')' '{' sentencias '}' { $ast = new If($expresion.ast, $sentencias.lista, null); }
+	| 'if' '(' expr ')' '{' sentencias '}' 'else' '{' (sentencia)* '}'
+	| 'while' '(' expr ')' '{' (sentencia)* '}'
+	| 'return' expr ';' { $ast = new Return($expresion.ast); }
+	| 'return' ';' { $ast = new Return(null); }
+	;
+
+
+funcionLlamada
+	: IDENT '(' expr* ')'
+	;
+
+parametros
+	: IDENT ':' tipo
+	| IDENT ':' tipo ','
+	| expr
+	;
+	
+expr
+	: IDENT
+	| LITENT
+	| LITREAL
+	| LITCHAR
+	| IDENT ('['(LITENT|IDENT|funcionLlamada)']')*
+	| expr '!' expr
+	| expr '*' expr
+	| expr '/' expr
+	| expr '%' expr
+	| expr '+' expr
+	| expr '-' expr
+	| expr '>' expr
+	| expr '<' expr
+	| expr '>=' expr
+	| expr '<=' expr
+	| expr '==' expr
+	| expr '!=' expr
+	| expr '&&' expr
+	| expr '||' expr
+	| expr ',' expr
+	| expr '.' expr
+	| '<' tipo '>' '(' expr ')'
+	| '(' expr ')'
+    | IDENT '(' expr')'
+	;
+
+
+tipo returns[Tipo ast]
+	: 'int' { $ast = new IntTipo(); }
+	| 'float' { $ast = new RealTipo(); }
+	| 'char' { $ast = new CharTipo(); }
+	| '[' LITENT ']' tipo { $ast = new ArrayTipo($LITENT, $tipo.ast); }
+	| IDENT { $ast = new IdentTipo(); }
+	;
+

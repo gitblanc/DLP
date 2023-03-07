@@ -1,0 +1,23 @@
+CATEGORIES
+definicion, sentencia, tipo, expresion
+
+NODES
+programa -> definicion*;
+
+defVariable:definicion -> tipo:tipo nombre:string;
+defStruct:definicion -> nombre:string definicion*;
+defFuncion:definicion -> nombre:string parametros* tipo defVariable* sentencia*;
+
+parametros -> nombre:string tipo;
+
+intTipo:tipo -> ;
+realTipo:tipo -> ;
+charTipo:tipo -> ;
+arrayTipo:tipo -> posicion:string tipo:tipo;
+identTipo:tipo -> nombre:string;
+
+asignacion:sentencia -> izquierda:expresion derecha:expresion;
+print:sentencia -> print:expresion printTipo:string;
+read:sentencia -> read:expresion; 
+funcionLlamada:sentencia -> nombre:string expresion*;
+if:sentencia -> condicion:expresion true:sentencia* false:sentencia*

@@ -38,94 +38,319 @@ public class <nombre clase> extends DefaultVisitor {
 	//		es la llamada a 'super.visit' la que debería ser borrada.
 	// ---------------------------------------------------------
 
-	//	class Program { List<VarDefinition> definitions;  List<Sentence> sentences; }
+	//	class Program { List<Definicion> definicion; }
 	public Object visit(Program node, Object param) {
 
 		// super.visit(node, param);
 
-		if (node.getDefinitions() != null)
-			for (VarDefinition child : node.getDefinitions())
-				child.accept(this, param);
-
-		if (node.getSentences() != null)
-			for (Sentence child : node.getSentences())
+		if (node.getDefinicion() != null)
+			for (Definicion child : node.getDefinicion())
 				child.accept(this, param);
 
 		return null;
 	}
 
-	//	class VarDefinition { Type type;  String name; }
-	public Object visit(VarDefinition node, Object param) {
+	//	class DefVariable { Tipo tipo;  String nombre; }
+	public Object visit(DefVariable node, Object param) {
 
 		// super.visit(node, param);
 
-		if (node.getType() != null)
-			node.getType().accept(this, param);
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
 
 		return null;
 	}
 
-	//	class IntType {  }
-	public Object visit(IntType node, Object param) {
+	//	class DefStruct { String nombre;  List<Definicion> definicion; }
+	public Object visit(DefStruct node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getDefinicion() != null)
+			for (Definicion child : node.getDefinicion())
+				child.accept(this, param);
+
 		return null;
 	}
 
-	//	class RealType {  }
-	public Object visit(RealType node, Object param) {
+	//	class DefFuncion { String nombre;  List<Parametros> parametros;  Tipo tipo;  List<DefVariable> defvariable;  List<Sentencia> sentencia; }
+	public Object visit(DefFuncion node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getParametros() != null)
+			for (Parametros child : node.getParametros())
+				child.accept(this, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		if (node.getDefvariable() != null)
+			for (DefVariable child : node.getDefvariable())
+				child.accept(this, param);
+
+		if (node.getSentencia() != null)
+			for (Sentencia child : node.getSentencia())
+				child.accept(this, param);
+
 		return null;
 	}
 
-	//	class Print { Expression expression; }
+	//	class Parametros { String nombre;  Tipo tipo; }
+	public Object visit(Parametros node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		return null;
+	}
+
+	//	class VariableStruct { String nombre;  Tipo tipo; }
+	public Object visit(VariableStruct node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		return null;
+	}
+
+	//	class IntTipo {  }
+	public Object visit(IntTipo node, Object param) {
+		return null;
+	}
+
+	//	class RealTipo {  }
+	public Object visit(RealTipo node, Object param) {
+		return null;
+	}
+
+	//	class CharTipo {  }
+	public Object visit(CharTipo node, Object param) {
+		return null;
+	}
+
+	//	class ArrayTipo { String posicion;  Tipo tipo; }
+	public Object visit(ArrayTipo node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		return null;
+	}
+
+	//	class StructTipo { String nombre; }
+	public Object visit(StructTipo node, Object param) {
+		return null;
+	}
+
+	//	class Asignacion { Expresion izquierda;  Expresion derecha; }
+	public Object visit(Asignacion node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getIzquierda() != null)
+			node.getIzquierda().accept(this, param);
+
+		if (node.getDerecha() != null)
+			node.getDerecha().accept(this, param);
+
+		return null;
+	}
+
+	//	class Print { Expresion print;  String printTipo; }
 	public Object visit(Print node, Object param) {
 
 		// super.visit(node, param);
 
-		if (node.getExpression() != null)
-			node.getExpression().accept(this, param);
+		if (node.getPrint() != null)
+			node.getPrint().accept(this, param);
 
 		return null;
 	}
 
-	//	class Assignment { Expression left;  Expression right; }
-	public Object visit(Assignment node, Object param) {
+	//	class Read { Expresion read; }
+	public Object visit(Read node, Object param) {
 
 		// super.visit(node, param);
 
-		if (node.getLeft() != null)
-			node.getLeft().accept(this, param);
-
-		if (node.getRight() != null)
-			node.getRight().accept(this, param);
+		if (node.getRead() != null)
+			node.getRead().accept(this, param);
 
 		return null;
 	}
 
-	//	class ArithmeticExpression { Expression left;  String operator;  Expression right; }
-	public Object visit(ArithmeticExpression node, Object param) {
+	//	class FuncionLlamada { String nombre;  List<Expresion> expresion; }
+	public Object visit(FuncionLlamada node, Object param) {
 
 		// super.visit(node, param);
 
-		if (node.getLeft() != null)
-			node.getLeft().accept(this, param);
-
-		if (node.getRight() != null)
-			node.getRight().accept(this, param);
+		if (node.getExpresion() != null)
+			for (Expresion child : node.getExpresion())
+				child.accept(this, param);
 
 		return null;
 	}
 
-	//	class Variable { String name; }
+	//	class If { Expresion condicion;  List<Sentencia> if_true;  List<Sentencia> if_false; }
+	public Object visit(If node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getCondicion() != null)
+			node.getCondicion().accept(this, param);
+
+		if (node.getIf_true() != null)
+			for (Sentencia child : node.getIf_true())
+				child.accept(this, param);
+
+		if (node.getIf_false() != null)
+			for (Sentencia child : node.getIf_false())
+				child.accept(this, param);
+
+		return null;
+	}
+
+	//	class While { Expresion condicion;  List<Sentencia> sentencia; }
+	public Object visit(While node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getCondicion() != null)
+			node.getCondicion().accept(this, param);
+
+		if (node.getSentencia() != null)
+			for (Sentencia child : node.getSentencia())
+				child.accept(this, param);
+
+		return null;
+	}
+
+	//	class Return { Expresion retorno; }
+	public Object visit(Return node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getRetorno() != null)
+			node.getRetorno().accept(this, param);
+
+		return null;
+	}
+
+	//	class ExpresionAritmetica { Expresion izquierda;  String operador;  Expresion derecha; }
+	public Object visit(ExpresionAritmetica node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getIzquierda() != null)
+			node.getIzquierda().accept(this, param);
+
+		if (node.getDerecha() != null)
+			node.getDerecha().accept(this, param);
+
+		return null;
+	}
+
+	//	class ExpresionLogica { Expresion izquierda;  String operador;  Expresion derecha; }
+	public Object visit(ExpresionLogica node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getIzquierda() != null)
+			node.getIzquierda().accept(this, param);
+
+		if (node.getDerecha() != null)
+			node.getDerecha().accept(this, param);
+
+		return null;
+	}
+
+	//	class ExpresionDistinto { Expresion not; }
+	public Object visit(ExpresionDistinto node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getNot() != null)
+			node.getNot().accept(this, param);
+
+		return null;
+	}
+
+	//	class Variable { String nombre; }
 	public Object visit(Variable node, Object param) {
 		return null;
 	}
 
-	//	class IntConstant { String value; }
-	public Object visit(IntConstant node, Object param) {
+	//	class Ident { String valor; }
+	public Object visit(Ident node, Object param) {
 		return null;
 	}
 
-	//	class RealConstant { String value; }
-	public Object visit(RealConstant node, Object param) {
+	//	class LitEnt { String valor; }
+	public Object visit(LitEnt node, Object param) {
+		return null;
+	}
+
+	//	class LitReal { String valor; }
+	public Object visit(LitReal node, Object param) {
+		return null;
+	}
+
+	//	class LitChar { String valor; }
+	public Object visit(LitChar node, Object param) {
+		return null;
+	}
+
+	//	class Cast { Tipo tipo;  Expresion valor; }
+	public Object visit(Cast node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		if (node.getValor() != null)
+			node.getValor().accept(this, param);
+
+		return null;
+	}
+
+	//	class Array { String nombre;  Expresion valor; }
+	public Object visit(Array node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getValor() != null)
+			node.getValor().accept(this, param);
+
+		return null;
+	}
+
+	//	class Struct { Expresion nombre;  String campos; }
+	public Object visit(Struct node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getNombre() != null)
+			node.getNombre().accept(this, param);
+
+		return null;
+	}
+
+	//	class ExpresionLlamada { String nombre;  List<Expresion> expresion; }
+	public Object visit(ExpresionLlamada node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getExpresion() != null)
+			for (Expresion child : node.getExpresion())
+				child.accept(this, param);
+
 		return null;
 	}
 }

@@ -1,0 +1,15 @@
+CATEGORIES
+definicion, sentencia, tipo, expresion
+
+NODES
+programa -> definicion*;
+
+defVariable:definicion -> tipo:tipo nombre:string;
+defStruct:definicion -> nombre:string definicion*;
+defFuncion:definicion -> nombre:string parametros* tipo defVariable* sentencia*;
+
+intTipo:tipo -> ;
+realTipo:tipo -> ;
+charTipo:tipo -> ;
+arrayTipo:tipo -> posicion:string tipo:tipo
+identTipo:tipo -> nombre:string  
