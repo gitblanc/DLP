@@ -1207,7 +1207,7 @@ public class GrammarParser extends Parser {
 						match(T__22);
 						setState(282);
 						((ExpresionContext)_localctx).IDENT = match(IDENT);
-						 ((ExpresionContext)_localctx).ast =  new Struct(((ExpresionContext)_localctx).expresion.ast, ((ExpresionContext)_localctx).IDENT); 
+						 ((ExpresionContext)_localctx).ast =  new Struct(_localctx.expresion(0), ((ExpresionContext)_localctx).IDENT); 
 						}
 						break;
 					}

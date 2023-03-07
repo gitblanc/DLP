@@ -35,6 +35,6 @@ litEnt:expresion -> valor:string;
 litReal:expresion -> valor:string;
 litChar:expresion -> valor:string;
 cast:expresion -> tipo valor:expresion;
-array:expresion -> nombre:string valor:expresion;
+array:expresion -> nombre:expresion valor:expresion;
 struct:expresion -> nombre:expresion campos:string;
 expresionLlamada:expresion -> nombre:string expresion*;

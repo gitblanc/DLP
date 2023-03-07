@@ -369,13 +369,13 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Array { String nombre;  Expresion valor; }
+	//	class Array { Expresion nombre;  Expresion valor; }
 	public Object visit(Array node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "Array", node, false);
 
-		print(indent + 1, "nombre", "String", node.getNombre());
+		visit(indent + 1, "nombre", "Expresion",node.getNombre());
 		visit(indent + 1, "valor", "Expresion",node.getValor());
 		return null;
 	}

@@ -78,7 +78,7 @@ expresion returns[Expresion ast]
 	| '(' expresion ')' { $ast = $expresion.ast; }
 	| '<' tipo '>' '(' expresion ')' { $ast = new Cast($tipo.ast, $expresion.ast); }
 	| expresion '[' expresion ']' { $ast = new Array($ctx.expresion(0), $ctx.expresion(1)); }
-	| expresion '.' IDENT { $ast = new Struct($expresion.ast, $IDENT); }
+	| expresion '.' IDENT { $ast = new Struct($ctx.expresion(0), $IDENT); }
 	| '!' expresion { $ast = new ExpresionDistinto($expresion.ast); }
 	| expresion op=('*'|'/'|'%'|'+'|'-') expresion { $ast = new ExpresionAritmetica($ctx.expresion(0), $op, $ctx.expresion(1)); }
 	| expresion op=('>'|'<'|'>='|'<='|'=='|'!='|'&&'|'||') expresion { $ast = new ExpresionLogica($ctx.expresion(0), $op, $ctx.expresion(1)); }

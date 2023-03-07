@@ -4,8 +4,10 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="emplead"/>
+		<item key="selection" value="$ctx.expresion(1)"/>
 		<list key="findhistory">
+			<item value="$ctx.expresion(0).ast"/>
+			<item value="$ctx.expresion(1)"/>
 			<item value="emplead"/>
 			<item value="Struct"/>
 			<item value="funcionLlamada"/>
@@ -14,6 +16,7 @@
 			<item value="print"/>
 		</list>
 		<list key="replacehistory">
+			<item value="$ctx.expresion(1).ast"/>
 		</list>
 	</section>
 </section>

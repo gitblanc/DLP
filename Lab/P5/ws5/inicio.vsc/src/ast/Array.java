@@ -8,21 +8,21 @@ import org.antlr.v4.runtime.*;
 
 import visitor.*;
 
-//	array:expresion -> nombre:String  valor:expresion
+//	array:expresion -> nombre:expresion  valor:expresion
 
 public class Array extends AbstractExpresion {
 
-	public Array(String nombre, Expresion valor) {
+	public Array(Expresion nombre, Expresion valor) {
 		this.nombre = nombre;
 		this.valor = valor;
 
        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
        // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(valor);
+       setPositions(nombre, valor);
 	}
 
 	public Array(Object nombre, Object valor) {
-		this.nombre = (nombre instanceof Token) ? ((Token)nombre).getText() : (String) nombre;
+		this.nombre = (Expresion) getAST(nombre);
 		this.valor = (Expresion) getAST(valor);
 
        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
@@ -30,10 +30,10 @@ public class Array extends AbstractExpresion {
        setPositions(nombre, valor);
 	}
 
-	public String getNombre() {
+	public Expresion getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
+	public void setNombre(Expresion nombre) {
 		this.nombre = nombre;
 	}
 
@@ -49,7 +49,7 @@ public class Array extends AbstractExpresion {
 		return v.visit(this, param);
 	}
 
-	private String nombre;
+	private Expresion nombre;
 	private Expresion valor;
 
 	public String toString() {

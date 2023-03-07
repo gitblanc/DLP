@@ -196,8 +196,10 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class Array { String nombre;  Expresion valor; }
+	//	class Array { Expresion nombre;  Expresion valor; }
 	public Object visit(Array node, Object param) {
+		if (node.getNombre() != null)
+			node.getNombre().accept(this, param);
 		if (node.getValor() != null)
 			node.getValor().accept(this, param);
 		return null;
