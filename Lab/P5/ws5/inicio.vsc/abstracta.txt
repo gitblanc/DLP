@@ -1,0 +1,7 @@
+CATEGORIES
+definicion, sentencia, tipo, expresion
+
+NODES
+programa -> definicion*
+
+varDefinition -> tipo nombre:string

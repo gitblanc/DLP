@@ -1,0 +1,16 @@
+/* Se permiten este tipo de comentarios
+*/
+
+// También se permiten estos comentarios
+// -------------------------------------
+
+// Definición de variables
+var a:int;
+var b:char;
+var c:float;
+
+// Asignacion de variables
+
+a = 250;
+b = 'A';
+c = 24.456;

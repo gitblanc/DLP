@@ -1,0 +1,79 @@
+grammar Grammar
+	;
+
+import Lexicon
+	;
+
+start
+	: definicion* EOF
+	;
+
+sentencia
+	: asignacion
+	| ('printsp'|'print'|'println') expr* ';'
+	| 'read' expr ';'
+    | IDENT '(' expr ')' ';'
+	| 'if' '(' expr ')' '{' sentencia* '}'
+	| 'if' '(' expr ')' '{' sentencia* '}' 'else' '{' (sentencia)* '}'
+	| 'while' '(' expr ')' '{' (sentencia)* '}'
+	| 'return' expr* ';'
+	;
+
+
+funcion
+	: IDENT '(' parametros* ')' (':' tipo)? '{' definicion* sentencia* '}'
+	;
+
+parametros
+	: IDENT ':' tipo
+	| IDENT ':' tipo ','
+	| expr
+	;
+
+asignacion
+	: expr '=' expr ';'
+	;
+	
+expr
+	: IDENT
+	| LITENT
+	| LITREAL
+	| LITCHAR
+	| expr '*' expr
+	| expr '/' expr
+	| expr '+' expr
+	| expr '-' expr
+	| expr '%' expr
+	| expr '!=' expr
+	| expr '==' expr
+	| expr '>=' expr
+	| expr '<=' expr
+	| expr '<' expr
+	| expr '>' expr
+	| expr '||' expr
+	| expr '&&' expr
+	| expr '!' expr
+	| expr ',' expr
+	| '(' expr ')'
+    | '<' tipo '>' '(' expr ')'
+    | IDENT '(' expr ')'
+	;
+
+definicion
+	: 'var' IDENT ':' tipo ';'
+	| 'struct' IDENT '{' campos+ '};' definicion
+	| funcion
+	;
+	
+campos
+	: IDENT ':' dimension* tipo ';'
+	;
+
+tipo
+	: 'int'
+	| 'float'
+	| 'char'
+	| '[' LITENT ']' tipo
+	| IDENT
+	;
+

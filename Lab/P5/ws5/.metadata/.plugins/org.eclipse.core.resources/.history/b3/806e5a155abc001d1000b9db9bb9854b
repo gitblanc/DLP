@@ -1,0 +1,5 @@
+CATEGORIES
+definicion, sentencia, tipo, funcion, parametros, expr, campos
+
+NODES
+programa -> definicion*

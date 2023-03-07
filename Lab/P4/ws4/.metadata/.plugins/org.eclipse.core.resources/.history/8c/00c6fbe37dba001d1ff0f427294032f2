@@ -1,0 +1,39 @@
+/* Se permiten este tipo de comentarios
+*/
+
+// También se permiten estos comentarios
+// -------------------------------------
+
+// Definición de variables
+var a:int;
+var b:char;
+var c:float;
+
+// Asignacion de variables
+a = 250;
+b = 'A';
+c = 24.456;
+
+// Structs ------------- 
+struct Direccion {
+	portal:int;
+	codigoPostal:int;
+};
+
+var d1:Direccion;
+var d2:Direccion;
+
+struct Persona {
+	edad:int;
+	direccion:Direccion;
+};
+
+// Combinaci�n de Arrays y Structs -------------
+var f:[6] Persona;
+
+struct Empresa {
+	cif:[9] char;
+	empleados:[10] Persona;
+};
+
+var microsoft: Empresa;

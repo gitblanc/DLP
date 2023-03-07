@@ -1,0 +1,5 @@
+CATEGORIES
+definicion, sentencia, tipo, expresion
+
+NODES
+programa -> definicion*

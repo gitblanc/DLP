@@ -1,0 +1,59 @@
+## Apectos léxicos -> todos cumplidos
+		Nota: Comentarios (importante no ponerlos en grammar.g4)
+
+## Tipos simples o primitivos -> hay int, float y char
+
+## Definición de variables
+	En la definición no se puede asignar un valor
+	Se pueden definir variables globales y locales tanto simples como compuestas
+	No tiene por qué haber variables
+	No hay definición múltiple de variables
+	
+## Asignación
+	Solo se pueden asignar valores de tipos simples
+	No hay conversión implícita al tipo de la expresión de la izquierda
+	No hay asignación múltiple
+
+## Conversiones de expresiones
+	No hay conversiones implícitas
+	Se pueden hacer casts
+	Operadores: + - * / % > < >= <= == != && || !
+	
+## Sentencias de control de flujo
+	IF con ELSE opcional
+	WHILE
+		(En ninguna es obligatorio que haya sentencias dentro de las llaves)
+	Paréntesis y llaves son obligatori@s aunque no haya sentencias
+
+## Entrada y Salida
+	Hay print, printsp, println (nop ha de haber una expresión)
+
+## Arrays
+	Hay arrays multidimensionales (de tipos simples y compuestos)
+	El tamaño en la definición es obligatorio
+
+## Structs
+	
+## Definición e invocación de funciones
+
+
+
+------------------------------------------------------------------
+programa -> está bien
+
+tipo -> está bien
+
+campos -> está bien
+
+definición -> está bien
+
+expr -> las prioridades de los operadores están bien
+
+asignacion -> está bien
+
+parametros -> está bien
+
+los arrays aceptan funciones
+
+
+

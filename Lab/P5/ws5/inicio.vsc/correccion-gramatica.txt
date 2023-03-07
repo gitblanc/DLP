@@ -1,0 +1,5 @@
+las sentencias han de estar dentro de funciones
+un programa puede ser: definicion variable, definicion funcion, definicion estructura
+
+las estructuras tienen dentro atributos
+las funciones tienen dentro sentencias, y las sentencias tienen expresiones
