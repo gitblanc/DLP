@@ -1,6 +1,7 @@
 # DLP
 
 ![](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+[![HitCount](https://hits.dwyl.com/gitblanc/DLP.svg?style=flat-square)](http://hits.dwyl.com/gitblanc/DLP) 
 
 This is my work for Programming Languages Design, but this repository only contains my personal notes.
 
